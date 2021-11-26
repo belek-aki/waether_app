@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class WeatherTable extends StatelessWidget {
-  final String temperature;
-  final String location;
+  final double? temperature;
+  final String? location;
   final DateTime dateTime;
-  final String typeWeather;
+  final String? typeWeather;
   const WeatherTable({
     Key? key,
     required this.temperature,
@@ -18,10 +18,10 @@ class WeatherTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 60),
+        const SizedBox(height: 50),
         Center(
           child: Text(
-            location,
+            location ?? '--',
             style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w800,
@@ -46,7 +46,7 @@ class WeatherTable extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              temperature,
+              "${temperature ?? '--'}",
               style: const TextStyle(
                 fontSize: 136,
                 fontWeight: FontWeight.w600,
@@ -69,7 +69,7 @@ class WeatherTable extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          typeWeather,
+          typeWeather ?? '--',
           style: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w600,

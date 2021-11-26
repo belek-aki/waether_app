@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:lesson_02_app/weather_main.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:weather/app_factory.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'bloc_observer/simple_bloc_observer.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Scaffold(
-        body: WeatherMainPage(),
-      ),
-    );
-  }
+main() async {
+  await dotenv.load(fileName: ".env");
+  final app = AppFactory();
+  BlocOverrides.runZoned(
+    () => runApp(app.build()),
+    blocObserver: SimpleBlocObserver(),
+  );
 }
